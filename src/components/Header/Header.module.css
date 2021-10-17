@@ -1,0 +1,89 @@
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+:root {
+  --primary: #007bff;
+  --secondary: #102a43;
+  --muted: #334e68;
+}
+
+.navLink {
+  font-size: 14px;
+  color: var(--muted) !important;
+  line-height: 20px;
+  text-align: center;
+  padding: 25px 10px;
+  font-weight: 500;
+  border: unset;
+  background-color: unset;
+  /* border-bottom: 1px solid #c4c4c4; */
+  margin-right: 35px;
+}
+
+.navvarBack {
+  border: unset;
+  background-color: unset;
+}
+
+.navLink:hover {
+  color: var(--secondary) !important;
+  font-weight: 600;
+  border-bottom: 4px solid var(--primary);
+}
+
+.navItem {
+  font-size: 14px;
+  margin-inline-end: 22px;
+  color: #c4c4c4 !important;
+  border-bottom: 2px solid #c4c4c4;
+  line-height: 16.94px;
+  width: auto;
+}
+
+.navItem:hover {
+  border-bottom: 1px solid var(--primary);
+}
+
+.navbarToggler {
+  border: none;
+}
+
+.navbarToggler:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.navItemSelected {
+  color: var(--secondary) !important;
+  border-bottom: 4px solid var(--primary);
+  border-radius: 2px;
+}
+
+.navBtn {
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.navBtn:hover {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.getHelp {
+  border: 1px solid #bcccdc;
+  border-radius: 32px;
+  padding: 8px 12px;
+  color: var(--secondary);
+  font-size: 14px;
+}
+
+.accountDropdown {
+  background: #f0f4f8;
+  border-radius: 32px;
+  padding: 8px 12px;
+  color: var(--secondary);
+  font-size: 14px;
+}

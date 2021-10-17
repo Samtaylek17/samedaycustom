@@ -1,0 +1,228 @@
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+:root {
+  --primary: #007bff;
+  --secondary: #102a43;
+  --muted: #334e68;
+}
+
+.navLink {
+  font-size: 14px;
+  color: var(--muted) !important;
+  line-height: 20px;
+  text-align: center;
+  padding: 25px 10px;
+  font-weight: 500;
+  border: unset;
+  background-color: unset;
+  /* border-bottom: 1px solid #c4c4c4; */
+  margin-right: 35px;
+}
+
+.navvarBack {
+  border: unset;
+  background-color: unset;
+}
+
+.navLink:hover {
+  color: var(--secondary) !important;
+  font-weight: 600;
+  border-bottom: 4px solid var(--primary);
+}
+
+.navItem {
+  font-size: 14px;
+  margin-inline-end: 22px;
+  color: #c4c4c4 !important;
+  border-bottom: 2px solid #c4c4c4;
+  line-height: 16.94px;
+  width: auto;
+}
+
+.navItem:hover {
+  border-bottom: 1px solid var(--primary);
+}
+
+.navbarToggler {
+  border: none;
+}
+
+.navbarToggler:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.navItemSelected {
+  color: var(--secondary) !important;
+  border-bottom: 4px solid var(--primary);
+  border-radius: 2px;
+}
+
+.navBtn {
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.navBtn:hover {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.getHelp {
+  border: 1px solid #bcccdc;
+  border-radius: 32px;
+  padding: 8px 12px;
+  color: var(--secondary);
+  font-size: 14px;
+}
+
+.accountDropdown {
+  background: #f0f4f8;
+  border-radius: 32px;
+  padding: 8px 12px;
+  color: var(--secondary);
+  font-size: 14px;
+}
+
+/* Sidemenu */
+
+.sideNav {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.sideNavItem p {
+  color: #fff;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 600;
+}
+
+.sideNavItem:hover {
+  background-color: #fff;
+}
+
+.sideNavItem:hover p {
+  color: #007bff;
+}
+
+.sideNavItem:hover .iconContainer > path {
+  fill: #007bff !important;
+}
+
+/* Another Sidesubmenu */
+
+.headline {
+  font-weight: 5000;
+  font-size: 20px;
+  line-height: 32px;
+  color: var(--secondary);
+}
+
+.bgGrey {
+  background-color: #e5e5e5;
+}
+
+/* Canvas Area */
+
+.canvasArea {
+  background-image: url('./img/shirt.png');
+  background-size: auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Undo Redo */
+
+.undoRedo {
+  background: #fff;
+  width: 64px;
+  height: 128px;
+  position: absolute;
+  top: 10px;
+  border-radius: 8px;
+}
+
+.undoBtn {
+  height: 50%;
+  border: none;
+  background-color: transparent;
+}
+
+.undoBtn:hover {
+  border: 1px solid #007bff;
+  border-radius: 8px;
+}
+
+.undoLabel {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  color: #486581;
+  letter-spacing: 0.04em;
+}
+
+/* Shirt Area which includes front, back right sleeve and left sleeve */
+.shirtArea {
+  height: 400px;
+  position: absolute;
+  border-radius: 12px;
+  width: 120px;
+  background-color: #fff;
+  right: 20px;
+  top: 20px;
+}
+
+.frontBtn {
+  border: none;
+  height: 25%;
+  background-color: #fff;
+  border-radius: 12px;
+}
+
+.shirtCustomLabel {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #486581;
+  letter-spacing: 0.02em;
+  line-height: 16px;
+  display: block;
+  padding: 5px 0;
+}
+
+.frontBtn:hover {
+  border: 1px solid #007bff;
+  border-radius: 12px;
+}
+
+/* Footer  */
+
+.getPricing {
+  border: none;
+  background: #007bff;
+  border-radius: 8px;
+  padding: 16px;
+  color: #fff;
+}
+
+.saveBtn {
+  border: none;
+  border-radius: 8px;
+  background: #e5f1ff;
+  padding: 16px;
+  color: #007bff;
+}
+
+.shareBtn {
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: transparent;
+  color: #007bff;
+  border: 1px solid #007bff;
+}
