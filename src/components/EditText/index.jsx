@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import styles from './EditText.module.css';
 import { ReactComponent as CloseIcon } from './img/close.svg';
+import { ReactComponent as AngleDown } from './img/angle-down.svg';
 
 const EditText = ({ onChange, text, selectMenu }) => {
   const cx = classNames.bind(styles);
@@ -33,7 +34,9 @@ const EditText = ({ onChange, text, selectMenu }) => {
             })} d-flex justify-content-between mt-3 border-bottom`}
           >
             <p>Font</p>
-            <p>Inter</p>
+            <p>
+              Inter <AngleDown />
+            </p>
           </div>
         </div>
       </div>

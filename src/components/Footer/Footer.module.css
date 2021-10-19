@@ -1,0 +1,26 @@
+/* Footer  */
+
+.getPricing {
+  border: none;
+  background: #007bff;
+  border-radius: 8px;
+  padding: 16px;
+  color: #fff;
+}
+
+.saveBtn {
+  border: none;
+  border-radius: 8px;
+  background: #e5f1ff;
+  padding: 16px;
+  color: #007bff;
+}
+
+.shareBtn {
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: transparent;
+  color: #007bff;
+  border: 1px solid #007bff;
+}

@@ -31,9 +31,8 @@ const FontList = ({ onChange, text, font, popularFonts, setFont }) => {
             <CloseIcon className="float-end mt-2 cursor-pointer" />
           </p>
           <Input
-            placeholder="Design Text"
+            placeholder="Search Font"
             className={`${cx({ textInput: true })}`}
-            value={text || ''}
             onChange={onChange}
           />
           <span className={`${cx({ recentlyUsed: true })} my-1`}>
@@ -61,7 +60,7 @@ const FontList = ({ onChange, text, font, popularFonts, setFont }) => {
                       marginBottom: '0',
                     }}
                   >
-                    Design Text
+                    {text}
                   </p>
                   <span
                     style={{
