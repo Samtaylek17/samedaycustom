@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { Modal, message } from 'antd';
-import ResizableContent from './ResizableContent';
-import './style.css';
+import axios from 'axios';
+
+import ResizableContent from '../../components/ResizableContent';
+import '../../components/ResizableContent/style.css';
 import styles from './Dashboard.module.css';
 import Header from '../../components/Header';
 import Sidemenu from '../../components/Sidemenu';
@@ -30,13 +32,13 @@ const Dashboard = () => {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState('');
-  const [fileList, setFileList] = useState({});
+  const [popularFonts, setPopularFonts] = useState([]);
   const [selectedMenu, setSelectedMenu] = useState('TEMPLATE');
   const [content, setContent] = useState(<Submenu />);
   const cx = classNames.bind(styles);
 
-  const isOpen = () => {
-    setOpen(true);
+  const changeFont = (option) => {
+    setFont(option);
   };
 
   const handleChange = (e) => {
@@ -86,7 +88,6 @@ const Dashboard = () => {
           info.file.name ||
             info.file.url.substring(info.file.url.lastIndexOf('/') + 1)
         );
-        console.log(info.file, info.fileList);
       }
       if (status === 'done') {
         message.success(`${info.file.name} file uploaded successfully.`);
@@ -94,15 +95,19 @@ const Dashboard = () => {
         message.error(`${info.file.name} file upload failed.`);
       }
     },
-    onDrop(e) {
-      console.log('Dropped files', e.dataTransfer.files);
-    },
+    onDrop(e) {},
   };
 
   useEffect(() => {
     switch (selectedMenu) {
       case 'TEXT':
-        setContent(<EditText onChange={handleChange} text={text} />);
+        setContent(
+          <EditText
+            onChange={handleChange}
+            text={text}
+            selectMenu={onMenuClick}
+          />
+        );
         break;
       case 'TEMPLATE':
         setContent(<Submenu />);
@@ -116,10 +121,30 @@ const Dashboard = () => {
           />
         );
         break;
+      case 'FONT':
+        setContent(
+          <FontList
+            onChange={handleChange}
+            text={text}
+            font={font}
+            popularFonts={popularFonts}
+            setFont={changeFont}
+          />
+        );
+        break;
       default:
         setContent(<Submenu />);
     }
   }, [selectedMenu]);
+
+  useEffect(async () => {
+    const request = await axios.get(
+      'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyAkmgQ1HZCDkVzVehaKzoVyLfLbF_btqxo&sort=popularity'
+    );
+    const popularity = request.data.items.slice(0, 8);
+
+    setPopularFonts(popularity);
+  }, []);
 
   return (
     <>
@@ -127,13 +152,7 @@ const Dashboard = () => {
       <div className="container-fluid">
         <div className="row">
           <Sidemenu selectMenu={onMenuClick} selectedMenu={selectedMenu} />
-          {/* <Submenu /> */}
-          {/* <FontList onChange={handleChange} text={text} font={font} /> */}
-          {/* <ImageUploader
-            handlePreview={handlePreview}
-            handleCancel={handleCancel}
-            props={props}
-          /> */}
+
           {content}
           <div
             className={`${cx({
@@ -160,36 +179,51 @@ const Dashboard = () => {
               >
                 <>
                   <div className={styles.drawArea}>
-                    <ResizableContent
-                      top={250}
-                      left={750}
-                      width={300}
-                      height={100}
-                      rotateAngle={0}
-                    >
-                      <div className="content content2">
-                        {/* <svg
-                          viewBox="0 0 100 50"
-                          preserveAspectRatio="xMidYMin slice"
-                          xmlns="http://www.w3.org/2000/svg"
-                          xmlnsXlink="http://www.w3.org/1999/xlink"
-                          className={styles.textBox}
-                        >
-                          <text x="50%" y="70%">
-                            {text}
-                          </text>
-                        </svg> */}
-                        {previewImage ? (
+                    {text && (
+                      <ResizableContent
+                        top={250}
+                        left={750}
+                        width={300}
+                        height={100}
+                        rotateAngle={0}
+                      >
+                        <div className="content content2">
+                          <svg
+                            viewBox="0 0 100 50"
+                            preserveAspectRatio="xMidYMin slice"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlnsXlink="http://www.w3.org/1999/xlink"
+                            className={styles.textBox}
+                          >
+                            <text
+                              x="50%"
+                              y="70%"
+                              style={{ fontFamily: `${font}` }}
+                            >
+                              {text}
+                            </text>
+                          </svg>
+                        </div>
+                      </ResizableContent>
+                    )}
+
+                    {previewImage && (
+                      <ResizableContent
+                        top={250}
+                        left={750}
+                        width={300}
+                        height={100}
+                        rotateAngle={0}
+                      >
+                        <div className="content content2">
                           <img
                             src={previewImage}
                             className="img-fluid"
                             alt="..."
                           />
-                        ) : (
-                          ''
-                        )}
-                      </div>
-                    </ResizableContent>
+                        </div>
+                      </ResizableContent>
+                    )}
                   </div>
                 </>
               </div>

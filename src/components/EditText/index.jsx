@@ -6,17 +6,9 @@ import axios from 'axios';
 import styles from './EditText.module.css';
 import { ReactComponent as CloseIcon } from './img/close.svg';
 
-const EditText = ({ onChange, text }) => {
+const EditText = ({ onChange, text, selectMenu }) => {
   const cx = classNames.bind(styles);
 
-  useEffect(async () => {
-    const request = await axios.get(
-      'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyAkmgQ1HZCDkVzVehaKzoVyLfLbF_btqxo&sort=popularity'
-    );
-    const popularity = request.data.items.slice(0, 10);
-
-    console.log(popularity);
-  }, []);
   return (
     <>
       <div className="col-sm-auto col-md-3 d-sm-flex align-items-stretch">
@@ -31,6 +23,18 @@ const EditText = ({ onChange, text }) => {
             className={`${cx({ textInput: true })}`}
             onChange={onChange}
           />
+          <div
+            tabIndex={0}
+            onKeyDown={() => selectMenu('FONT')}
+            role="button"
+            onClick={() => selectMenu('FONT')}
+            className={`${cx({
+              cursor: true,
+            })} d-flex justify-content-between mt-3 border-bottom`}
+          >
+            <p>Font</p>
+            <p>Inter</p>
+          </div>
         </div>
       </div>
     </>
@@ -40,6 +44,7 @@ const EditText = ({ onChange, text }) => {
 EditText.propTypes = {
   onChange: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
+  selectMenu: PropTypes.func.isRequired,
 };
 
 export default EditText;

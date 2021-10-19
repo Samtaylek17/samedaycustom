@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
+import { ClockCircleOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import WebFont from 'webfontloader';
 import { Input } from 'antd';
@@ -7,19 +8,19 @@ import PropTypes from 'prop-types';
 import styles from './FontList.module.css';
 import { ReactComponent as CloseIcon } from './img/close.svg';
 
-const FontList = ({ onChange, text, font }) => {
-  const [popularFonts, setPopularFonts] = useState([]);
+const FontList = ({ onChange, text, font, popularFonts, setFont }) => {
+  // const [popularFonts, setPopularFonts] = useState([]);
   const cx = classNames.bind(styles);
 
-  useEffect(async () => {
-    const request = await axios.get(
-      'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyAkmgQ1HZCDkVzVehaKzoVyLfLbF_btqxo&sort=popularity'
-    );
-    const popularity = request.data.items.slice(0, 8);
+  // useEffect(async () => {
+  //   const request = await axios.get(
+  //     'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyAkmgQ1HZCDkVzVehaKzoVyLfLbF_btqxo&sort=popularity'
+  //   );
+  //   const popularity = request.data.items.slice(0, 8);
 
-    setPopularFonts(popularity);
-    console.log(popularity);
-  }, []);
+  //   setPopularFonts(popularity);
+  //   console.log(popularity);
+  // }, []);
 
   return (
     <>
@@ -32,9 +33,12 @@ const FontList = ({ onChange, text, font }) => {
           <Input
             placeholder="Design Text"
             className={`${cx({ textInput: true })}`}
+            value={text || ''}
             onChange={onChange}
           />
-
+          <span className={`${cx({ recentlyUsed: true })} my-1`}>
+            <ClockCircleOutlined className="align-middle" /> Recently used fonts
+          </span>
           <ul className="list-unstyled text-center">
             {popularFonts.map((fontStyle) => (
               <li key={fontStyle.family} className="border-bottom py-2">
@@ -43,26 +47,32 @@ const FontList = ({ onChange, text, font }) => {
                     families: [`${fontStyle.family}`],
                   },
                 })}
-                <p
-                  style={{
-                    fontFamily: `${fontStyle.family}`,
-                    fontSize: '24px',
-                    lineHeight: '26px',
-                    color: '#102A43',
-                    marginBottom: '0',
-                  }}
+                <button
+                  type="button"
+                  className={`${cx({ fontBtn: true })}`}
+                  onClick={() => setFont(fontStyle.family)}
                 >
-                  Design Text
-                </p>
-                <span
-                  style={{
-                    fontSize: '14px',
-                    lineHeight: '20px',
-                    color: '#627D98',
-                  }}
-                >
-                  {fontStyle.family}
-                </span>
+                  <p
+                    style={{
+                      fontFamily: `${fontStyle.family}`,
+                      fontSize: '24px',
+                      lineHeight: '26px',
+                      color: '#102A43',
+                      marginBottom: '0',
+                    }}
+                  >
+                    Design Text
+                  </p>
+                  <span
+                    style={{
+                      fontSize: '14px',
+                      lineHeight: '20px',
+                      color: '#627D98',
+                    }}
+                  >
+                    {fontStyle.family}
+                  </span>
+                </button>
               </li>
             ))}
           </ul>
@@ -76,6 +86,8 @@ FontList.propTypes = {
   onChange: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
   font: PropTypes.string.isRequired,
+  popularFonts: PropTypes.arrayOf(PropTypes.any).isRequired,
+  setFont: PropTypes.func.isRequired,
 };
 
 export default FontList;

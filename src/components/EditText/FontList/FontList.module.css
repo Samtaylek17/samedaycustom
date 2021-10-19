@@ -14,3 +14,18 @@
   margin-top: 20px;
   margin-bottom: 10px;
 }
+
+.fontBtn {
+  width: 100%;
+  border: none;
+  background: transparent;
+}
+
+.recentlyUsed {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: right;
+  color: #007bff;
+  float: right;
+}
