@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import { Modal, message } from 'antd';
 import ResizableContent from './ResizableContent';
 import './style.css';
 import styles from './Dashboard.module.css';
@@ -9,6 +10,7 @@ import Sidemenu from '../../components/Sidemenu';
 import Submenu from '../../components/Submenu';
 import EditText from '../../components/EditText';
 import ImageUploader from '../../components/ImageUploader';
+import FontList from '../../components/EditText/FontList';
 
 import { ReactComponent as UndoIcon } from './img/undo.svg';
 import { ReactComponent as RedoIcon } from './img/redo.svg';
@@ -23,8 +25,13 @@ import { ReactComponent as ShirtIcon } from './img/shirt-sm.svg';
 
 const Dashboard = () => {
   const [text, setText] = useState('');
+  const [font, setFont] = useState('');
   const [open, setOpen] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState('');
+  const [previewVisible, setPreviewVisible] = useState(false);
+  const [previewImage, setPreviewImage] = useState('');
+  const [previewTitle, setPreviewTitle] = useState('');
+  const [fileList, setFileList] = useState({});
   const cx = classNames.bind(styles);
 
   const isOpen = () => {
@@ -41,6 +48,58 @@ const Dashboard = () => {
     // onTabClick(menu);
   };
 
+  function getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  }
+
+  const handlePreview = async (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+
+    setPreviewImage(file.url || file.preview);
+    setPreviewVisible(true);
+    setPreviewTitle(
+      file.name || file.url.substring(file.url.lastIndexOf('/') + 1)
+    );
+  };
+
+  const handleCancel = () => setPreviewVisible(false);
+
+  const props = {
+    name: 'file',
+    multiple: false,
+    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    async onChange(info) {
+      const { status } = info.file;
+      if (status !== 'uploading') {
+        if (!info.file.url && !info.file.preview) {
+          info.file.preview = await getBase64(info.file.originFileObj);
+        }
+
+        setPreviewImage(info.file.url || info.file.preview);
+        setPreviewTitle(
+          info.file.name ||
+            info.file.url.substring(info.file.url.lastIndexOf('/') + 1)
+        );
+        console.log(info.file, info.fileList);
+      }
+      if (status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully.`);
+      } else if (status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+    onDrop(e) {
+      console.log('Dropped files', e.dataTransfer.files);
+    },
+  };
+
   return (
     <>
       <Header />
@@ -48,8 +107,12 @@ const Dashboard = () => {
         <div className="row">
           <Sidemenu />
           {/* <Submenu /> */}
-          {/* <EditText onChange={handleChange} text={text} /> */}
-          <ImageUploader />
+          <FontList onChange={handleChange} text={text} font={font} />
+          {/* <ImageUploader
+            handlePreview={handlePreview}
+            handleCancel={handleCancel}
+            props={props}
+          /> */}
           <div
             className={`${cx({
               bgGrey: true,
@@ -94,6 +157,15 @@ const Dashboard = () => {
                             {text}
                           </text>
                         </svg>
+                        {/* {previewImage ? (
+                          <img
+                            src={previewImage}
+                            className="img-fluid"
+                            alt="..."
+                          />
+                        ) : (
+                          ''
+                        )} */}
                       </div>
                     </ResizableContent>
                   </div>

@@ -66,7 +66,7 @@ ResizableContent.propTypes = {
   top: PropTypes.number.isRequired,
   left: PropTypes.number.isRequired,
   rotateAngle: PropTypes.number.isRequired,
-  children: PropTypes.instanceOf(React.propTypes).isRequired,
+  children: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default ResizableContent;

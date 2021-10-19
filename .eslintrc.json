@@ -17,6 +17,7 @@
 		"react/state-in-constructor": "off",
 		"no-use-before-define": "off",
 		"no-unused-vars": "off",
+		"no-param-reassign": [2, { "props": false }],
 		"prettier/prettier": [
 			"error",
 			{

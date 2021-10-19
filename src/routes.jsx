@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Spin } from 'antd';
+import { useSelector } from 'react-redux';
 
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 
