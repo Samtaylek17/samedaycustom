@@ -27,11 +27,12 @@ const Dashboard = () => {
   const [text, setText] = useState('');
   const [font, setFont] = useState('');
   const [open, setOpen] = useState(false);
-  const [selectedMenu, setSelectedMenu] = useState('');
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState('');
   const [fileList, setFileList] = useState({});
+  const [selectedMenu, setSelectedMenu] = useState('TEMPLATE');
+  const [content, setContent] = useState(<Submenu />);
   const cx = classNames.bind(styles);
 
   const isOpen = () => {
@@ -42,10 +43,8 @@ const Dashboard = () => {
     setText(e.target.value);
   };
 
-  const onMenuClick = (e, menu) => {
-    e.preventDefault();
+  const onMenuClick = (menu) => {
     setSelectedMenu(menu);
-    // onTabClick(menu);
   };
 
   function getBase64(file) {
@@ -100,19 +99,42 @@ const Dashboard = () => {
     },
   };
 
+  useEffect(() => {
+    switch (selectedMenu) {
+      case 'TEXT':
+        setContent(<EditText onChange={handleChange} text={text} />);
+        break;
+      case 'TEMPLATE':
+        setContent(<Submenu />);
+        break;
+      case 'UPLOAD':
+        setContent(
+          <ImageUploader
+            handlePreview={handlePreview}
+            handleCancel={handleCancel}
+            props={props}
+          />
+        );
+        break;
+      default:
+        setContent(<Submenu />);
+    }
+  }, [selectedMenu]);
+
   return (
     <>
       <Header />
       <div className="container-fluid">
         <div className="row">
-          <Sidemenu />
+          <Sidemenu selectMenu={onMenuClick} selectedMenu={selectedMenu} />
           {/* <Submenu /> */}
-          <FontList onChange={handleChange} text={text} font={font} />
+          {/* <FontList onChange={handleChange} text={text} font={font} /> */}
           {/* <ImageUploader
             handlePreview={handlePreview}
             handleCancel={handleCancel}
             props={props}
           /> */}
+          {content}
           <div
             className={`${cx({
               bgGrey: true,
@@ -146,7 +168,7 @@ const Dashboard = () => {
                       rotateAngle={0}
                     >
                       <div className="content content2">
-                        <svg
+                        {/* <svg
                           viewBox="0 0 100 50"
                           preserveAspectRatio="xMidYMin slice"
                           xmlns="http://www.w3.org/2000/svg"
@@ -156,8 +178,8 @@ const Dashboard = () => {
                           <text x="50%" y="70%">
                             {text}
                           </text>
-                        </svg>
-                        {/* {previewImage ? (
+                        </svg> */}
+                        {previewImage ? (
                           <img
                             src={previewImage}
                             className="img-fluid"
@@ -165,7 +187,7 @@ const Dashboard = () => {
                           />
                         ) : (
                           ''
-                        )} */}
+                        )}
                       </div>
                     </ResizableContent>
                   </div>

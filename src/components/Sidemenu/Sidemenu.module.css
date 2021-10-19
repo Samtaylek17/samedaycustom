@@ -23,3 +23,21 @@
 .sideNavItem:hover .iconContainer > path {
   fill: #007bff !important;
 }
+
+.navLink {
+  background: transparent;
+  border: none;
+  width: 100%;
+}
+
+.navActive {
+  background-color: #fff;
+}
+
+.navActive p {
+  color: #007bff;
+}
+
+.navActive .iconContainer > path {
+  fill: #007bff !important;
+}
