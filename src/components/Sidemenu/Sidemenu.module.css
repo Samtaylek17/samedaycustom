@@ -1,0 +1,25 @@
+/* Sidemenu */
+
+.sideNav {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.sideNavItem p {
+  color: #fff;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 600;
+}
+
+.sideNavItem:hover {
+  background-color: #fff;
+}
+
+.sideNavItem:hover p {
+  color: #007bff;
+}
+
+.sideNavItem:hover .iconContainer > path {
+  fill: #007bff !important;
+}

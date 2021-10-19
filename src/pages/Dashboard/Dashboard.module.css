@@ -88,32 +88,6 @@ body {
   font-size: 14px;
 }
 
-/* Sidemenu */
-
-.sideNav {
-  padding-top: 24px;
-  padding-bottom: 24px;
-}
-
-.sideNavItem p {
-  color: #fff;
-  font-size: 13px;
-  line-height: 16px;
-  font-weight: 600;
-}
-
-.sideNavItem:hover {
-  background-color: #fff;
-}
-
-.sideNavItem:hover p {
-  color: #007bff;
-}
-
-.sideNavItem:hover .iconContainer > path {
-  fill: #007bff !important;
-}
-
 /* Another Sidesubmenu */
 
 .headline {
@@ -225,4 +199,14 @@ body {
   background-color: transparent;
   color: #007bff;
   border: 1px solid #007bff;
+}
+
+/* Draw Area */
+.drawArea {
+  border: 1px dashed #334e68;
+  height: 385px;
+  width: 60%;
+  align-self: center;
+  display: flex;
+  /* position: relative; */
 }

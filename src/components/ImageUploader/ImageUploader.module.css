@@ -1,0 +1,22 @@
+.dragger {
+  height: auto !important;
+  padding: 16px 24px;
+}
+
+.header {
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #486581;
+}
+
+.uploadLabel {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #102a43;
+  margin-bottom: 0;
+}
