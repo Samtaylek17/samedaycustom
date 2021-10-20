@@ -51,14 +51,13 @@ const Sidemenu = ({ selectMenu, selectedMenu }) => {
           </li>
           <li
             className={`${
-              selectedMenu === 'TEMPLATE'
+              selectedMenu === 'USETEMPLATE'
                 ? `${cx({ sideNavItem: true, navActive: true })} nav-item`
                 : `${cx({ sideNavItem: true })} nav-item`
             }`}
           >
             <button
               type="button"
-              onClick={() => selectMenu('TEMPLATE')}
               className={`${
                 selectedMenu === 'TEMPLATE'
                   ? `${cx({ navLink: true, active: true })} nav-link active`

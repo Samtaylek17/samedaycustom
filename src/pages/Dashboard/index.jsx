@@ -144,7 +144,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Header />
+      <Header selectMenu={onMenuClick} selectedMenu={selectedMenu} />
       <div className="container-fluid">
         <div className="row">
           <Sidemenu selectMenu={onMenuClick} selectedMenu={selectedMenu} />

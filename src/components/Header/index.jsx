@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
 import styles from './Header.module.css';
 import Logo from './img/logo.svg';
 import { ReactComponent as TogglerIcon } from './img/toggler-icon.svg';
@@ -7,19 +8,12 @@ import { ReactComponent as MessageIcon } from './img/Chat.svg';
 import { ReactComponent as AngleDown } from './img/angle-down.svg';
 import { ReactComponent as UserIcon } from './img/user.svg';
 
-const Header = () => {
+const Header = ({ selectMenu, selectedMenu }) => {
   const [open, setOpen] = useState(false);
-  const [selectedMenu, setSelectedMenu] = useState('');
   const cx = classNames.bind(styles);
 
   const isOpen = () => {
     setOpen(true);
-  };
-
-  const onMenuClick = (e, menu) => {
-    e.preventDefault();
-    setSelectedMenu(menu);
-    // onTabClick(menu);
   };
 
   return (
@@ -49,9 +43,9 @@ const Header = () => {
                 type="button"
                 className={`${cx({
                   navLink: true,
-                  navItemSelected: selectedMenu === 'design',
+                  navItemSelected: selectedMenu === 'TEMPLATE',
                 })} nav-link active`}
-                onClick={(event) => onMenuClick(event, 'design')}
+                onClick={() => selectMenu('TEMPLATE')}
               >
                 Design Lab
               </button>
@@ -61,7 +55,6 @@ const Header = () => {
                   navLink: true,
                   navItemSelected: selectedMenu === 'products',
                 })} nav-link active`}
-                onClick={(event) => onMenuClick(event, 'products')}
               >
                 Products
               </button>
@@ -71,7 +64,6 @@ const Header = () => {
                   navLink: true,
                   navItemSelected: selectedMenu === 'howworks',
                 })} nav-link active`}
-                onClick={(event) => onMenuClick(event, 'howworks')}
               >
                 How it works
               </button>
@@ -81,7 +73,6 @@ const Header = () => {
                   navLink: true,
                   navItemSelected: selectedMenu === 'pricing',
                 })} nav-link active`}
-                onClick={(event) => onMenuClick(event, 'pricing')}
               >
                 Bulk pricing
               </button>
@@ -111,6 +102,11 @@ const Header = () => {
       </nav>
     </>
   );
+};
+
+Header.propTypes = {
+  selectMenu: PropTypes.func.isRequired,
+  selectedMenu: PropTypes.string.isRequired,
 };
 
 export default Header;
