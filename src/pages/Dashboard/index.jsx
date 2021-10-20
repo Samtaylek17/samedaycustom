@@ -125,6 +125,7 @@ const Dashboard = () => {
             font={font}
             popularFonts={popularFonts}
             setFont={changeFont}
+            selectMenu={onMenuClick}
           />
         );
         break;

@@ -16,7 +16,12 @@ const EditText = ({ onChange, text, selectMenu }) => {
         <div className="col-md-12">
           <p className={`${cx({ editText: true })} text-center mt-2`}>
             Edit Text
-            <CloseIcon className="float-end mt-2 cursor-pointer" />
+            <CloseIcon
+              onClick={() => selectMenu('TEMPLATE')}
+              className={`${cx({
+                cursor: true,
+              })} float-end mt-2 cursor-pointer`}
+            />
           </p>
 
           <Input

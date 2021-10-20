@@ -29,3 +29,7 @@
   color: #007bff;
   float: right;
 }
+
+.cursor {
+  cursor: pointer;
+}

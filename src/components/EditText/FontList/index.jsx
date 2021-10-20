@@ -8,19 +8,15 @@ import PropTypes from 'prop-types';
 import styles from './FontList.module.css';
 import { ReactComponent as CloseIcon } from './img/close.svg';
 
-const FontList = ({ onChange, text, font, popularFonts, setFont }) => {
-  // const [popularFonts, setPopularFonts] = useState([]);
+const FontList = ({
+  onChange,
+  text,
+  font,
+  popularFonts,
+  setFont,
+  selectMenu,
+}) => {
   const cx = classNames.bind(styles);
-
-  // useEffect(async () => {
-  //   const request = await axios.get(
-  //     'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyAkmgQ1HZCDkVzVehaKzoVyLfLbF_btqxo&sort=popularity'
-  //   );
-  //   const popularity = request.data.items.slice(0, 8);
-
-  //   setPopularFonts(popularity);
-  //   console.log(popularity);
-  // }, []);
 
   return (
     <>
@@ -28,12 +24,16 @@ const FontList = ({ onChange, text, font, popularFonts, setFont }) => {
         <div className="col-md-12">
           <p className={`${cx({ changeFont: true })} text-center mt-2`}>
             Change Font
-            <CloseIcon className="float-end mt-2 cursor-pointer" />
+            <CloseIcon
+              onClick={() => selectMenu('TEXT')}
+              className={`${cx({
+                cursor: true,
+              })} float-end mt-2 cursor-pointer`}
+            />
           </p>
           <Input
             placeholder="Search Font"
             className={`${cx({ textInput: true })}`}
-            onChange={onChange}
           />
           <span className={`${cx({ recentlyUsed: true })} my-1`}>
             <ClockCircleOutlined className="align-middle" /> Recently used fonts
@@ -60,7 +60,7 @@ const FontList = ({ onChange, text, font, popularFonts, setFont }) => {
                       marginBottom: '0',
                     }}
                   >
-                    {text}
+                    {text || 'Design Text'}
                   </p>
                   <span
                     style={{
@@ -87,6 +87,7 @@ FontList.propTypes = {
   font: PropTypes.string.isRequired,
   popularFonts: PropTypes.arrayOf(PropTypes.any).isRequired,
   setFont: PropTypes.func.isRequired,
+  selectMenu: PropTypes.func.isRequired,
 };
 
 export default FontList;
